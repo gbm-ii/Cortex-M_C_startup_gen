@@ -17,4 +17,4 @@ The program accepts three options influencing its operation:
   
 creates `startup_stm32f401xc.c` file, which may successfully replace the `startup_stm32f401xx.s` file originally created by STM32CubeIDE.
 
-The motivation behind creating the code was to get rid of the assembly startup file and to make it convenient to use the non-defined in the MCU software-generated interrupts for event handling.
+The motivation behind creating the code was to get rid of the assembly startup file and to make it convenient to use the NVIC interrupts non-defined in the given MCU for software-generated event handling.
