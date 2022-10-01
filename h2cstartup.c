@@ -76,8 +76,8 @@ const char defhandler[] =
 "   for (;;);\n"
 "}\n"
 "\n"
-"// the default empty handler for exceptions not handled by user, may be overriden\n"
-"__attribute__ ((weak)) void Default_Handler(void)\n"
+"// the default empty handler for exceptions not handled by user\n"
+"void Default_Handler(void)\n"
 "{\n"
 "    for (;;);\n"
 "}\n\n";
