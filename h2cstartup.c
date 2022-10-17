@@ -88,10 +88,11 @@ const char vtstart[] = "\n"
 "    void (*Core_Exceptions[15])(void);\n"
 "    void (*NVIC_Interrupts[%d])(void);\n"
 "};\n\n"
+"#define CX(a) [(a) - 1]\n\n"
 "const struct vectable_ g_pfnvectors __attribute__((section(\".isr_vector\"))) = {\n"
 "    .Initial_SP = &_estack,\n"
 "    .Core_Exceptions = {\n"
-"        Reset_Handler,\n";
+"        CX( 1) = Reset_Handler,\n";
 
 const char vtmid[] = 
 "    },\n"
@@ -231,12 +232,10 @@ int main(int argc, char *argv[])
 	fprintf(out, vtstart, maxirqn + 1);
     for (int i = 2; i < 16; i++)
 	{
-		fprintf(out, "        ");
 		if (irqname[i][0])
-			fprintf(out, "%sHandler", stdexcnames && stdexcname[i] ? stdexcname[i] : irqname[i]);
-		else
-			fprintf(out, "0");
-		fprintf(out, i < 15 ? ",\n" : "\n");
+			fprintf(out, "        CX(%2d) = %sHandler%s", i,
+			stdexcnames && stdexcname[i] ? stdexcname[i] : irqname[i],
+			i < 15 ? ",\n" : "\n");
 	}
 	fprintf(out, vtmid);
 	int inw = maxirqn > 99 ? 3 : 2;
