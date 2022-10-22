@@ -61,7 +61,7 @@ const char defhandler[] =
 "int main(void);\n"
 "\n"
 "// code executed after core reset\n"
-"__attribute__ ((naked, noreturn)) static void Reset_Handler(void)\n"
+"__attribute__ ((naked, noreturn)) void Reset_Handler(void)\n"
 "{\n"
 "   SystemInit();\n"
 "   // initialize .data section values from Flash\n"
